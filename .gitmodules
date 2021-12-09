@@ -1,0 +1,4 @@
+[submodule "{{ cookiecutter.repo_name }}"]
+	path = {{ cookiecutter.repo_name }}
+	url = F:/projects/CC_example_template
+	branch = prepare_for_CC
