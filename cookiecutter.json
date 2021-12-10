@@ -1,0 +1,11 @@
+{
+  "project_name": "Unique Project Name",
+  "repo_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+  "module_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_').replace('_', '') }}",
+  "author_name": "Your name",
+  "author_mail": "Your.name@email.com",
+  "description": "A short description of the project.",
+  "dl_framework": ["Tensorflow", "PyTorch"],
+  "add_example_code": ["no", "yes"],
+  "open_source_license": ["MIT", "BSD-3-Clause", "No license file"]
+}

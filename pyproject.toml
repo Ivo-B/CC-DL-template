@@ -1,0 +1,57 @@
+[build-system]
+requires = ["poetry-core>=1.1.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.nitpick]
+style = "https://raw.githubusercontent.com/wemake-services/wemake-python-styleguide/master/styles/nitpick-style.toml"
+
+
+[tool.poetry]
+name = "CC-DL-template"
+description = "Never have problems again when setting up a DL software project."
+version = "0.1.0"
+readme = "README.md"
+#Authors must be in the form name <email>.
+authors = [
+  "Ivo Baltruschat <im.baltruschat@icloud.com>"
+]
+repository = "https://github.com/Ivo-B/CC-DL-template"
+keywords = ["machine learning", "deep learning", "tensorflow", "pytorch", "poetry", "docker", "cookiecutter"]
+
+license = "MIT"
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+cookiecutter = "^1.7"
+
+
+
+[tool.poetry.dev-dependencies]
+binaryornot = "^0.4"
+
+wemake-python-styleguide = "^0.15"
+flake8-pytest-style = "^1.5"
+flake8-logging-format = "^0.6"
+nitpick = "^0.27"
+
+
+pytest = "^6.2"
+pytest-randomly = "^3.8"
+pytest-cookies = "^0.6"
+pytest-clarity = "^1.0.1"
+pytest-sugar = "^0.9.4"
+hypothesis = "^6.14"
+
+sphinx = "^4.1"
+sphinx-autodoc-typehints = "^1.12"
+tomlkit = "^0.7"
+doc8 = "^0.9"
+
+yamllint = "^1.26"
+safety = "^1.10"
+dotenv-linter = "^0.2"
+ipython = "^7.25"
+pre-commit = "^2.16.0"
