@@ -1,4 +1,4 @@
 [submodule "{{ cookiecutter.repo_name }}"]
 	path = {{ cookiecutter.repo_name }}
-	url = F:/projects/CC_example_template
+	url = https://github.com/Ivo-B/CC-DL-template-example
 	branch = prepare_for_CC
