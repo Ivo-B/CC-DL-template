@@ -9,12 +9,23 @@ It does the following:
 
 import re
 import sys
+import subprocess
 
 REPO_NAME = "{{ cookiecutter.repo_name }}"
 REPO_REGEX = r"^[a-z][a-z0-9\_\-]+[a-z0-9]$"
 
 MODULE_NAME = "{{ cookiecutter.module_name }}"
 MODULE_REGEX = r"^[a-z][a-z\_]+[a-z]$"
+
+
+def init_git_submodule():
+    """Method for executing shell command to init git submodule."""
+    print("Running: git submodule update --init")  # noqa: WPS421
+    output = subprocess.run(["git", "submodule", "update", "--init"], capture_output=True)
+    if output.returncode == 0:
+        print(output.stdout)
+    else:
+        raise ValueError("ERROR: {0} .".format(output.stderr))
 
 
 def validate_repo_name():
@@ -47,6 +58,12 @@ def validate_module_name():
         ]
         raise ValueError(" ".join(message).format(MODULE_NAME))
 
+
+try:
+    init_git_submodule()
+except ValueError as ex:
+    print(ex)  # noqa: WPS421
+    sys.exit(1)
 
 validators = (
     validate_repo_name,
