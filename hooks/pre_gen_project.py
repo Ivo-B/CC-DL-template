@@ -10,6 +10,8 @@ It does the following:
 import re
 import sys
 import subprocess
+from cookiecutter.config import get_user_config
+from pathlib import Path
 
 REPO_NAME = "{{ cookiecutter.repo_name }}"
 REPO_REGEX = r"^[a-z][a-z0-9\_\-]+[a-z0-9]$"
@@ -20,8 +22,9 @@ MODULE_REGEX = r"^[a-z][a-z\_]+[a-z]$"
 
 def init_git_submodule():
     """Method for executing shell command to init git submodule."""
+    tmp_dir = Path(get_user_config()['cookiecutters_dir']) / "CC-DL-template"
     print("Running: git submodule update --init")  # noqa: WPS421
-    output = subprocess.run(["git", "submodule", "update", "--init"], capture_output=True)
+    output = subprocess.run(["git", "submodule", "update", "--init"], capture_output=True, cwd=tmp_dir)
     if output.returncode == 0:
         print(output.stdout)
     else:
