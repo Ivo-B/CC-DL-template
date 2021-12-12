@@ -20,13 +20,12 @@
 ## Requirements to use the cookiecutter template:
  - Python 3.9+
  - Cookiecutter
-   - Install [Forked Cookiecutter Python package](https://github.com/Ivo-B/cookiecutter) with pip
-     - I forked the original [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/), to add a simple support of conditionally cookiecutter parameters
-     - The Dict-Keys can now also use jinja2 notation
+   - Install [Cookiecutter Python package](https://github.com/cookiecutter/cookiecutter) with pip
+
 Python packages:
 
 ``` bash
-pip install git+https://github.com/Ivo-B/cookiecutter.git
+pip install cookiecutter
 ```
 
 
