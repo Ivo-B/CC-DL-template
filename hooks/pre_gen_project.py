@@ -5,8 +5,6 @@ import sys
 from pathlib import Path
 from subprocess import run  # noqa: S404
 
-from cookiecutter.config import get_user_config
-
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger("pre_gen_project")
 
@@ -19,8 +17,8 @@ MODULE_REGEX = r"^[a-z][a-z0-9\_]+$"
 
 def init_git_submodule():
     """Method for executing shell command to init git submodule."""
-    tmp_dir = Path(get_user_config()["cookiecutters_dir"]).absolute() / "CC-DL-template"
-    logger.info("Running: git submodule update --init")
+    tmp_dir = Path("{{ cookiecutter._template }}")
+    logger.info("Running in %s:\n git submodule update --init", tmp_dir)
     output = run(  # noqa: S603, S607
         ["git", "submodule", "update", "--init"],
         capture_output=True,

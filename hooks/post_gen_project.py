@@ -16,7 +16,7 @@ MODULE_NAME = "{{ cookiecutter.module_name }}"
 ALL_TEMP_FOLDERS = frozenset(("licenses",))
 ALL_TEMP_FILES = frozenset((".git",))
 
-ALL_EXAMPLE_FOLDER = frozenset(("configs", MODULE_NAME, "tests", "notebooks"))
+ALL_EXAMPLE_FOLDER = frozenset((MODULE_NAME, "configs", "tests", "notebooks"))
 
 # Messages
 PROJECT_SUCCESS = """
