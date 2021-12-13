@@ -1,5 +1,7 @@
 # Cookiecutter Deep Learning Template
 
+Never have problems again when setting up a DL software project.
+
 ## Purpose
 
 - Simplified deployment of research software and reproducibility of results for other users
@@ -19,20 +21,43 @@
 
 ## Requirements to use the cookiecutter template:
  - Python 3.9+
- - Cookiecutter
-   - Install [Cookiecutter Python package](https://github.com/cookiecutter/cookiecutter) with pip
+ - Cookiecutter 1.7+
 
-Python packages:
-
+Install [Cookiecutter Python package](https://github.com/cookiecutter/cookiecutter) with pip
 ``` bash
 pip install cookiecutter
 ```
-
 
 ## To start a new project, run:
 
 ```bash
 cookiecutter https://github.com/Ivo-B/CC-DL-template
+```
+
+Cookiecutter prompts you for information regarding your plugin:
+```
+project_name [Unique Project Name]:
+repo_name [unique-project-name]:
+module_name [uniqueprojectname]:
+author_name [Your name]:
+author_mail [Your.name@email.com]:
+description [A short description of the project.]:
+Select dl_framework:
+1 - Tensorflow
+2 - PyTorch
+Choose from 1, 2, 3 [1]:
+Select add_example_code:
+1 - yes
+2 - no
+Choose from 1, 2 [1]:
+Select license:
+1 - MIT
+2 - BSD-3
+3 - Apache-2.0
+4 - GNU GPL v3.0
+5 - Mozilla Public License 2.0
+6 - none
+Choose from 1, 2, 3, 4, 5, 6 [1]:
 ```
 
 ## License
