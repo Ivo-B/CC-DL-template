@@ -1,0 +1,47 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install poetry
+      env:
+        POETRY_VERSION: "1.1.11"
+      run: |
+        curl -sSL "https://install.python-poetry.org" | python -
+        # Adding `poetry` to `$PATH`:
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: Set up cache
+      uses: actions/cache@v2
+      with:
+        path: .venv
+        key: venv-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+    - name: Install dependencies
+      run: |
+        poetry install
+        poetry run pip install -U pip
+    - name: Run checks
+      run: |
+        poetry run flake8 .
+        poetry run pytest ./tests
+        poetry run poetry check
+        poetry run pip check
+        poetry run safety check --full-report
