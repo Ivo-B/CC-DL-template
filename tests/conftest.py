@@ -9,7 +9,7 @@ default_args: dict = {
     "description": "A nice test project.",
     "dl_framework": "Tensorflow",
     "add_example_code": "yes",
-    "open_source_license": "MIT",
+    "license": "MIT",
 }
 
 

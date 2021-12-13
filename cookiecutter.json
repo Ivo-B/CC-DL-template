@@ -7,5 +7,12 @@
   "description": "A short description of the project.",
   "dl_framework": ["Tensorflow", "PyTorch"],
   "add_example_code": ["yes", "no"],
-  "open_source_license": ["MIT", "BSD-3", "Apache-2.0", "GNU GPL v3.0", "Mozilla Public License 2.0", "No license file"]
+  "license": [
+    "MIT",
+    "BSD-3",
+    "Apache-2.0",
+    "GNU GPL v3.0",
+    "Mozilla Public License 2.0",
+    "none"
+  ]
 }

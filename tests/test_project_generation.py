@@ -7,10 +7,7 @@ https://github.com/pydanny/cookiecutter-django/blob/master/tests
 
 import os
 import re
-from pathlib import Path
-from subprocess import PIPE, run
 
-import chardet
 import pytest
 import tomlkit
 from binaryornot.check import is_binary
@@ -22,7 +19,11 @@ RE_OBJ = re.compile(PATTERN)
 
 def build_files_list(root_dir):
     """Build a list containing absolute paths to the generated files."""
-    return [os.path.join(dirpath, file_path) for dirpath, _subdirs, files in os.walk(root_dir) for file_path in files]
+    file_list = []
+    for dirpath, _subdirs, files in os.walk(root_dir):
+        for file_path in files:
+            file_list.append(os.path.join(dirpath, file_path))
+    return file_list
 
 
 def assert_variables_replaced(paths):
@@ -73,137 +74,7 @@ def test_pyproject_toml(cookies, context):
     assert poetry["description"] == context["description"]
 
 
-# TODO: update folder list
-def test_verify_folders(cookies, context):
-    """
-    Tests that expected folders and only expected folders exist.
-    """
-    baked_project = cookies.bake(extra_context=context)
-
-    expected_dirs = [
-        ".",
-        ".venv",
-        "data",
-        "data/external",
-        "data/interim",
-        "data/processed",
-        "data/raw",
-        "docs",
-        "models",
-        "notebooks",
-        "references",
-        "reports",
-        "reports/figures",
-        context["module_name"],
-        f"{context['module_name']}/data",
-        f"{context['module_name']}/features",
-        f"{context['module_name']}/models",
-        f"{context['module_name']}/visualization",
-    ]
-
-    expected_dirs = [Path(d) for d in expected_dirs]
-
-    existing_dirs = [
-        d.resolve().relative_to(Path(baked_project.project_path))
-        for d in Path(baked_project.project_path).glob("**")
-        if d.is_dir()
-    ]
-
-    assert sorted(existing_dirs) == sorted(expected_dirs)
-
-
-# TODO: update file list
-def test_verify_files(cookies, context):
-    """
-    Test that expected files and only expected files exist.
-    """
-    baked_project = cookies.bake(extra_context=context)
-
-    expected_files = [
-        ".env",
-        ".gitignore",
-        "Makefile",
-        "poetry.toml",
-        "pyproject.toml",
-        "README.md",
-        ".venv/.gitkeep",
-        "data/external/.gitkeep",
-        "data/interim/.gitkeep",
-        "data/processed/.gitkeep",
-        "data/raw/.gitkeep",
-        "docs/Makefile",
-        "docs/commands.rst",
-        "docs/conf.py",
-        "docs/getting-started.rst",
-        "docs/index.rst",
-        "docs/make.bat",
-        "notebooks/.gitkeep",
-        "references/.gitkeep",
-        "reports/.gitkeep",
-        "reports/figures/.gitkeep",
-        "models/.gitkeep",
-        f"{context['module_name']}/__init__.py",
-        f"{context['module_name']}/data/__init__.py",
-        f"{context['module_name']}/data/make_dataset.py",
-        f"{context['module_name']}/features/__init__.py",
-        f"{context['module_name']}/features/build_features.py",
-        f"{context['module_name']}/models/__init__.py",
-        f"{context['module_name']}/models/train_model.py",
-        f"{context['module_name']}/models/predict_model.py",
-        f"{context['module_name']}/visualization/__init__.py",
-        f"{context['module_name']}/visualization/visualize.py",
-    ]
-
-    # conditional files
-    if not context["open_source_license"].startswith("No license"):
-        expected_files.append("LICENSE")
-
-    expected_files = [Path(f) for f in expected_files]
-
-    existing_files = [
-        f.relative_to(Path(baked_project.project_path))
-        for f in Path(baked_project.project_path).glob("**/*")
-        if f.is_file()
-    ]
-
-    assert sorted(existing_files) == sorted(expected_files)
-
-
-# def test_makefile_commands(cookies, context):
-#     """
-#     Actually shell out to bash and run the make commands for:
-#         - create_environment
-#         - requirements
-#     Ensure that these use the proper environment.
-#     """
-#     baked_project = cookies.bake(extra_context=context)
-#     test_path = Path(__file__).parent
-#
-#     if context["environment_manager"] == 'poetry':
-#         harness_path = test_path / "poetry_harness.sh"
-#     elif context["environment_manager"] == 'none':
-#         return True
-#     else:
-#         raise ValueError(f"Environment manager '{context['environment_manager']}' not found in test harnesses.")
-#
-#     result = run(["bash", str(harness_path), str(baked_project.resolve())], stderr=PIPE, stdout=PIPE)
-#     result_returncode = result.returncode
-#
-#     encoding = chardet.detect(result.stdout)["encoding"]
-#     if encoding is None:
-#         encoding = "utf-8"
-#
-#     # normally hidden by pytest except in failure we want this displayed
-#     print("\n======================= STDOUT ======================")
-#     print(result.stdout)
-#
-#     print("\n======================= STDERR ======================")
-#     print(result.stderr)
-#
-#     assert result_returncode == 0
-
-
-@pytest.mark.parametrize(
+@pytest.mark.parametrize(  # noqa: WPS317
     ("prompt", "entered_value"),
     [
         ("repo_name", "MyProject"),
