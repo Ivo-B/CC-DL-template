@@ -1,0 +1,35 @@
+# YAML 1.2
+---
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Cookiecutter Deep Learning Template"
+authors:
+  - family-names: Baltruschat
+    given-names: Ivo
+    orcid: https://orcid.org/0000-0002-8748-3820
+date-released: 2021-12-12
+version: 0.1.0
+repository-code: https://github.com/Ivo-B/CC-DL-template
+# doi: 10.5281/zenodo.1234
+license: MIT
+
+references:
+  - authors:
+      - name: DrivenData
+    title: "Cookiecutter Data Science"
+    repository-code: "https://github.com/drivendata/cookiecutter-data-science"
+    type: software
+    license: MIT
+  - authors:
+      - name: Wemake
+    title: "Wemake-django-template"
+    repository-code: "https://github.com/wemake-services/wemake-django-template"
+    type: software
+    license: MIT
+  - authors:
+      - family-names: Zalewski
+        given-names: Lukasz
+    title: "Lightning-hydra-template"
+    repository-code: "https://github.com/ashleve/lightning-hydra-template"
+    type: software
+    license: MIT
